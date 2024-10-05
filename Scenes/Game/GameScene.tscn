@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://xg4k761f25qy"]
+[gd_scene load_steps=6 format=3 uid="uid://xg4k761f25qy"]
 
-[ext_resource type="PackedScene" uid="uid://dfbbm4hq48jdw" path="res://Assets/BackButton/BackButtonPrototype.tscn" id="1_18w7v"]
+[ext_resource type="Script" path="res://Boids/Swarm.cs" id="1_uepog"]
+[ext_resource type="Texture2D" uid="uid://c0qf1bjpf1nqq" path="res://Assets/Ant/ant.png" id="2_4cej0"]
+[ext_resource type="Texture2D" uid="uid://rtbmcuuihpag" path="res://Assets/Aphid/aphid.png" id="3_rpqkb"]
+[ext_resource type="Script" path="res://AudioServer/AudioServerInstance.cs" id="4_8ktvo"]
+
+[sub_resource type="Curve2D" id="Curve2D_0nlyd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 532, 290, 0, 0, 0, 0, 532, 349, 0, 0, 0, 0, 602, 376, 0, 0, 0, 0, 645.446, 395.2, 0, 0, 0, 0, 682, 377, 0, 0, 0, 0, 720, 338, 0, 0, 0, 0, 736, 294, 0, 0, 0, 0, 720, 250, 0, 0, 0, 0, 654, 237, 0, 0, 0, 0, 593, 247, 0, 0, 0, 0, 532, 290)
+}
+point_count = 11
 
 [node name="GameScene" type="Node2D"]
+
+[node name="audio" type="Node" parent="."]
+script = ExtResource("4_8ktvo")
+soundsToLoad = [1, 0]
 
 [node name="Label" type="Label" parent="."]
 offset_left = 375.0
@@ -11,8 +24,23 @@ offset_right = 556.0
 offset_bottom = 264.0
 text = "game"
 
-[node name="Button" parent="." instance=ExtResource("1_18w7v")]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 67.0
-offset_bottom = 40.0
+[node name="Node" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Node"]
+offset_left = 41.0
+offset_top = 35.0
+offset_right = 946.0
+offset_bottom = 722.0
+
+[node name="Path2D" type="Path2D" parent="Node"]
+position = Vector2(-1318.84, -308.34)
+scale = Vector2(2.90196, 2.19975)
+curve = SubResource("Curve2D_0nlyd")
+
+[node name="Node2D" type="Node2D" parent="Node"]
+script = ExtResource("1_uepog")
+amount = 365
+boidTexture = ExtResource("2_4cej0")
+foodTexture = ExtResource("3_rpqkb")
+rectPath = NodePath("../ColorRect")
+pathPath = NodePath("../Path2D")

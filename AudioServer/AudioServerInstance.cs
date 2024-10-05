@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-[GlobalClass, Tool]
+[Tool]
 public partial class AudioServerInstance : Node
 {
     private FrozenDictionary<Sounds, Sound> sounds;
