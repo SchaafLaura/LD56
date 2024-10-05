@@ -1,15 +1,28 @@
 <Project Sdk="Godot.NET.Sdk/4.3.0">
+    
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
+    <!--<PublishAot>true</PublishAot>-->
   </PropertyGroup>
+    
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+    
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <!-- Root the assemblies to avoid trimming. -->
+    <TrimmerRootAssembly Include="GodotSharp" />
+    <TrimmerRootAssembly Include="$(TargetName)" />
+    <TrimmerRootAssembly Include="Newtonsoft.Json" Version="13.0.3" />
+    <TrimmerRootAssembly Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+    
 </Project>
